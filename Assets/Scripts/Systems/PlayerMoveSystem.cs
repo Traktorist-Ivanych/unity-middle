@@ -19,22 +19,26 @@ public class PlayerMoveSystem : ComponentSystem
     protected override void OnUpdate()
     {
         Entities.With(moveQuery).ForEach(
-            (Entity entity, Rigidbody rigidbody, ref InputData playerInputData, ref MoveData moveData) =>
+            (Entity entity, Rigidbody rigidbody, ref InputData inputData, ref MoveData moveData) =>
             {
-                duraction = new Vector3(playerInputData.PlayerMove.x, 0, playerInputData.PlayerMove.y);
+                duraction = new Vector3(inputData.PlayerMove.x, 0, inputData.PlayerMove.y);
 
-                rigidbody.AddForce(duraction * moveData.PlayerSpeedComponent, ForceMode.Impulse);
+                rigidbody.AddForce(duraction * moveData.PlayerSpeedComponent);
             });
 
         //я хотел реализовать rigidbody.AddForce и Quaternion.LookRotation в одном запросе ForEach,
         //но была ошибка (как я понял, нет перегрузки ForEach принимающей 2 класса и структуры,
         //реализующие IComponentData), правильно ли разделить действия в 2 запросах ForEach?
+        //или правильно будет реализовать движение подобно тому, как реализована атака и рывок?
         Entities.With(moveQuery).ForEach(
-            (Entity entity, Transform transform, ref InputData playerInputData, ref MoveData moveData) =>
+            (Entity entity, Transform transform, ref InputData inputData) =>
             {
-                Quaternion quaternion = Quaternion.LookRotation(duraction, Vector3.up);
+                if (inputData.IsPlayerMove)
+                {
+                    Quaternion quaternion = Quaternion.LookRotation(duraction, Vector3.up);
 
-                transform.rotation = quaternion;
+                    transform.rotation = quaternion;
+                }
             });
 
     }
