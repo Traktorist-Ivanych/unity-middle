@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 969162455}
   - component: {fileID: 969162454}
   - component: {fileID: 969162453}
-  - component: {fileID: 969162456}
   m_Layer: 5
   m_Name: JerkButton
   m_TagString: Untagged
@@ -689,19 +688,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969162451}
   m_CullTransparentMesh: 1
---- !u!114 &969162456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969162451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/space
 --- !u!1 &1017916651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1945697681}
   m_Layer: 3
-  m_Name: WeapontStartTransform
+  m_Name: BulletStartTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,7 +1232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2058210654}
   m_Layer: 3
-  m_Name: EmptyForDuraction
+  m_Name: TransformForDuraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1361,7 +1347,6 @@ GameObject:
   - component: {fileID: 4049433511814920806}
   - component: {fileID: 4049433511818312262}
   - component: {fileID: 4049433511817345158}
-  - component: {fileID: 4049433511815145033}
   - component: {fileID: 4049433511815145032}
   - component: {fileID: 4049433511815145031}
   m_Layer: 3
@@ -1397,19 +1382,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.12298457, y: 1.3304188, z: 0.042285442}
   m_Center: {x: -0.000873439, y: -0.49534106, z: -0.00096441805}
---- !u!114 &4049433511815145033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4049433511815145030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConversionMode: 1
 --- !u!23 &4049433511817345158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2619,8 +2591,8 @@ GameObject:
   - component: {fileID: 8422892626655692990}
   - component: {fileID: 8422892626662964085}
   - component: {fileID: 8422892626662964081}
-  - component: {fileID: 8422892626662964083}
   - component: {fileID: 8422892626662964087}
+  - component: {fileID: 8422892626662964083}
   - component: {fileID: 8422892626662964089}
   - component: {fileID: 8422892626662964090}
   m_Layer: 3
@@ -2671,10 +2643,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8422892626662964080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7d7495833204790ba1d3a8755397f8, type: 3}
+  m_Script: {fileID: 11500000, guid: b026dc93e0628384fac6b53fd70c8e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConversionMode: 1
+  actionDelay: 1.5
+  transformForDuraction: {fileID: 2058210654}
+  jerkSpeed: 150
 --- !u!1 &8422892626662964084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,12 +2704,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8422892626662964080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d16dcb085f2f954e8d7d7057d2b54e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a5bfc33b6830934aac482a6b59ea28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JerkAction: {fileID: 8422892626662964090}
-  ShootAction: {fileID: 8422892626662964089}
-  PlayerSpeed: 2500
+  playerJekr: {fileID: 8422892626662964083}
+  playerAttack: {fileID: 8422892626662964089}
+  playerMove: {fileID: 8422892626662964090}
 --- !u!1 &8422892626662964088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2761,14 +2735,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8422892626662964080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a62620ad1c91fa478a97f98e7296a50, type: 3}
+  m_Script: {fileID: 11500000, guid: 24ec08b07411e0f45b8ac409d917d919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 1017916653}
-  WeapontStartTransform: {fileID: 1945697681}
-  EmptyForDuraction: {fileID: 2058210654}
-  ShootDelay: 1.5
-  WeaponSpeed: 25
+  actionDelay: 1.5
+  bulletRigidbody: {fileID: 1017916653}
+  transformForDuraction: {fileID: 2058210654}
+  bulletStartTransform: {fileID: 1945697681}
+  bulletSpeed: 25
 --- !u!114 &8422892626662964090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,13 +2752,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8422892626662964080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612193738c90fa843875f06d5278ac00, type: 3}
+  m_Script: {fileID: 11500000, guid: fb41412c0a5afb84e9fead714c2e46cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmptyForDuraction: {fileID: 2058210654}
-  PlayerRigidbody: {fileID: 8422892626662964081}
-  JerkSpeed: 150
-  JerkActionDelay: 1.5
+  moveSpeed: 250
 --- !u!1 &8422892626662964092
 GameObject:
   m_ObjectHideFlags: 0
