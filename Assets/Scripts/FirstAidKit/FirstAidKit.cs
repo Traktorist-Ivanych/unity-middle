@@ -10,8 +10,11 @@ public class FirstAidKit : MonoBehaviour
     {
         if(other.TryGetComponent(out Health health))
         {
-            health.GetCureHp(hpToCure);
-            gameObject.SetActive(false);
+            if (health.IsNeedForCure)
+            {
+                health.GetCureHp(hpToCure);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

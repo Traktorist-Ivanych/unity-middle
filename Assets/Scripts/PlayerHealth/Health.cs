@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public delegate void HealthAcrions();
-    public event HealthAcrions TakeDamageEvent;
-    public event HealthAcrions GetCureHpEvent;
-    public event HealthAcrions DeathEvent;
+    public delegate void HealthActions();
+    public event HealthActions TakeDamageEvent;
+    public event HealthActions GetCureHpEvent;
+    public event HealthActions DeathEvent;
 
     [SerializeField] private float hpMaxValue;
     [SerializeField] private float hpCurrentValue;
