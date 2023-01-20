@@ -53,6 +53,24 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee404c9d-8430-4abc-afcc-0b28dd53433c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cda5193-49aa-4f5b-8053-5d4804911375"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +161,28 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1ea91cf-2bdc-4172-8615-7c027a9e7dd6"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1635b12b-8b27-43a8-b57c-8ebda9bc7a9f"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Load"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -154,6 +194,8 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Attack = m_Keyboard.FindAction("Attack", throwIfNotFound: true);
         m_Keyboard_Jerk = m_Keyboard.FindAction("Jerk", throwIfNotFound: true);
+        m_Keyboard_Save = m_Keyboard.FindAction("Save", throwIfNotFound: true);
+        m_Keyboard_Load = m_Keyboard.FindAction("Load", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +258,8 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Attack;
     private readonly InputAction m_Keyboard_Jerk;
+    private readonly InputAction m_Keyboard_Save;
+    private readonly InputAction m_Keyboard_Load;
     public struct KeyboardActions
     {
         private @PlayerInputControls m_Wrapper;
@@ -223,6 +267,8 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Attack => m_Wrapper.m_Keyboard_Attack;
         public InputAction @Jerk => m_Wrapper.m_Keyboard_Jerk;
+        public InputAction @Save => m_Wrapper.m_Keyboard_Save;
+        public InputAction @Load => m_Wrapper.m_Keyboard_Load;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +287,12 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Jerk.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
                 @Jerk.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
                 @Jerk.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
+                @Save.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
+                @Save.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
+                @Save.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
+                @Load.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
+                @Load.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
+                @Load.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -254,6 +306,12 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Jerk.started += instance.OnJerk;
                 @Jerk.performed += instance.OnJerk;
                 @Jerk.canceled += instance.OnJerk;
+                @Save.started += instance.OnSave;
+                @Save.performed += instance.OnSave;
+                @Save.canceled += instance.OnSave;
+                @Load.started += instance.OnLoad;
+                @Load.performed += instance.OnLoad;
+                @Load.canceled += instance.OnLoad;
             }
         }
     }
@@ -263,5 +321,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnJerk(InputAction.CallbackContext context);
+        void OnSave(InputAction.CallbackContext context);
+        void OnLoad(InputAction.CallbackContext context);
     }
 }
