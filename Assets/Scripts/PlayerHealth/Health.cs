@@ -18,6 +18,12 @@ public class Health : MonoBehaviour
         get { return isAlive; }
     }
 
+    public float CurrentHp
+    {
+        get => hpCurrentValue;
+        set { hpCurrentValue = value; }
+    }
+
     public bool IsNeedForCure
     {
         get

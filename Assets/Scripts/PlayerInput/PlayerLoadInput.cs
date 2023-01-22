@@ -7,6 +7,6 @@ public class PlayerLoadInput : MonoBehaviour, IInputAbility
 {
     public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
-        SavesManager.LoadGame();
+        PlayFabTools.LoadGame();
     }
 }

@@ -5,6 +5,13 @@ using UnityEngine;
 public class FirstAidKit : MonoBehaviour
 {
     [SerializeField] private float hpToCure;
+    private bool isUsed = false;
+
+    public bool IsUsed
+    {
+        get => isUsed;
+        set { isUsed = value; }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,8 +20,15 @@ public class FirstAidKit : MonoBehaviour
             if (health.IsNeedForCure)
             {
                 health.GetCureHp(hpToCure);
+                isUsed = true;
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    public void ActiveOrNot(bool isFirstAidKitUsed)
+    {
+        IsUsed = isFirstAidKitUsed;
+        gameObject.SetActive(!isFirstAidKitUsed);
     }
 }
