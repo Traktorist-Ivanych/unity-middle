@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IConfigurable
 {
     public delegate void HealthActions();
     public event HealthActions TakeDamageEvent;
     public event HealthActions GetCureHpEvent;
     public event HealthActions DeathEvent;
 
-    [SerializeField] private float hpMaxValue;
     [SerializeField] private float hpCurrentValue;
+    private float hpMaxValue;
     private bool isAlive;
 
     public bool IsAlive
@@ -28,19 +29,21 @@ public class Health : MonoBehaviour
     {
         get
         {
-            if (hpCurrentValue < hpMaxValue)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+           return hpCurrentValue < hpMaxValue;
         }
+    }
+
+    public IConfiguration Configuration { get; set; }
+
+    [Inject]
+    public void LoadConfiguration(IConfiguration config)
+    {
+        Configuration = config;
     }
 
     private void Start()
     {
+        hpMaxValue = Configuration.MaxPlayerHP;
         isAlive = true;
         hpCurrentValue = hpMaxValue;
     }

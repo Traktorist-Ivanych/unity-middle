@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
-public class PlayerMove : MonoBehaviour, IInputAbility
+public class PlayerMove : MonoBehaviour, IInputAbility, IConfigurable
 {
-    [SerializeField] private float moveSpeed;
     private Rigidbody playerRigidbody;
     private Transform playerTransform;
     private Vector2 readPlayerInput;
+    private float moveSpeed;
+
+    public IConfiguration Configuration { get; set; }
 
     private void Start()
     {
+        moveSpeed = Configuration.PlayerMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
+    }
+
+    [Inject]
+    public void LoadConfiguration(IConfiguration config)
+    {
+        Configuration = config;
     }
 
     private void FixedUpdate()
