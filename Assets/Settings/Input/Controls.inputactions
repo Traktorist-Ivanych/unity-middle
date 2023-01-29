@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Hide",
+                    "type": "Button",
+                    "id": "aaa9512e-b757-4417-9fe3-8c0fe1138bbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Save",
                     "type": "Button",
                     "id": "ee404c9d-8430-4abc-afcc-0b28dd53433c",
@@ -159,6 +168,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Load",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bef5eaf3-49f7-4486-ae5b-a28dfa5f8d4b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

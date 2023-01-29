@@ -55,6 +55,15 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Hide"",
+                    ""type"": ""Button"",
+                    ""id"": ""aaa9512e-b757-4417-9fe3-8c0fe1138bbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Save"",
                     ""type"": ""Button"",
                     ""id"": ""ee404c9d-8430-4abc-afcc-0b28dd53433c"",
@@ -183,6 +192,17 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Load"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bef5eaf3-49f7-4486-ae5b-a28dfa5f8d4b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -194,6 +214,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Attack = m_Keyboard.FindAction("Attack", throwIfNotFound: true);
         m_Keyboard_Jerk = m_Keyboard.FindAction("Jerk", throwIfNotFound: true);
+        m_Keyboard_Hide = m_Keyboard.FindAction("Hide", throwIfNotFound: true);
         m_Keyboard_Save = m_Keyboard.FindAction("Save", throwIfNotFound: true);
         m_Keyboard_Load = m_Keyboard.FindAction("Load", throwIfNotFound: true);
     }
@@ -258,6 +279,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Attack;
     private readonly InputAction m_Keyboard_Jerk;
+    private readonly InputAction m_Keyboard_Hide;
     private readonly InputAction m_Keyboard_Save;
     private readonly InputAction m_Keyboard_Load;
     public struct KeyboardActions
@@ -267,6 +289,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Attack => m_Wrapper.m_Keyboard_Attack;
         public InputAction @Jerk => m_Wrapper.m_Keyboard_Jerk;
+        public InputAction @Hide => m_Wrapper.m_Keyboard_Hide;
         public InputAction @Save => m_Wrapper.m_Keyboard_Save;
         public InputAction @Load => m_Wrapper.m_Keyboard_Load;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
@@ -287,6 +310,9 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Jerk.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
                 @Jerk.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
                 @Jerk.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnJerk;
+                @Hide.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnHide;
+                @Hide.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnHide;
+                @Hide.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnHide;
                 @Save.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
                 @Save.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
                 @Save.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnSave;
@@ -306,6 +332,9 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Jerk.started += instance.OnJerk;
                 @Jerk.performed += instance.OnJerk;
                 @Jerk.canceled += instance.OnJerk;
+                @Hide.started += instance.OnHide;
+                @Hide.performed += instance.OnHide;
+                @Hide.canceled += instance.OnHide;
                 @Save.started += instance.OnSave;
                 @Save.performed += instance.OnSave;
                 @Save.canceled += instance.OnSave;
@@ -321,6 +350,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnJerk(InputAction.CallbackContext context);
+        void OnHide(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
     }

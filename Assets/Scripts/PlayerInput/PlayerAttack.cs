@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : PlayerInputActionDelay, IInputAbility
 {
+    [SerializeField] private TrailRenderer swordTrail;
     [SerializeField] private Rigidbody bulletRigidbody;
     [SerializeField] private Transform transformForDuraction;
     [SerializeField] private Transform bulletStartTransform;
@@ -22,8 +23,10 @@ public class PlayerAttack : PlayerInputActionDelay, IInputAbility
         if (CanActionExecute)
         {
             bulletRigidbody.velocity = Vector3.zero;
+            bulletRigidbody.angularVelocity = Vector3.zero;
             bulletRigidbody.transform.SetPositionAndRotation(
-                bulletStartTransform.position, transform.rotation);
+                bulletStartTransform.position, bulletStartTransform.rotation);
+            swordTrail.Clear();
 
             Vector3 duraction = (transform.position - transformForDuraction.position).normalized;
             bulletRigidbody.AddForce(duraction * bulletSpeed + playerRigidbody.velocity, 
