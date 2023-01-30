@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 
 public class PlayerHide : PlayerInputActionDelay, IInputAbility
 {
-    [SerializeField] private SkinnedMeshRenderer skinnedMesh;
     [SerializeField] private Material playerMaterial;
     private bool executeHideActions;
     private float materialHideTime = 1;
     private float currentHideActionTime;
+    private string hideMaterialPropertyName = "Vector1_bad362c3d9cd4b628db70be4da5de212";
+
+    private void Start()
+    {
+        playerMaterial.SetFloat(hideMaterialPropertyName, 1);
+    }
 
     private void Update()
     {
@@ -24,9 +30,7 @@ public class PlayerHide : PlayerInputActionDelay, IInputAbility
                 {
                     materialHideTime = 0;
                 }
-                playerMaterial.SetFloat("TimeToHide", materialHideTime);
-                Debug.Log(playerMaterial.GetFloat("TimeToHide"));
-                skinnedMesh.material = playerMaterial;
+                playerMaterial.SetFloat(hideMaterialPropertyName, materialHideTime);
             }
             else if (currentHideActionTime >= 6f)
             {
@@ -35,7 +39,7 @@ public class PlayerHide : PlayerInputActionDelay, IInputAbility
                 {
                     materialHideTime = 1;
                 }
-                playerMaterial.SetFloat("TimeToHide", materialHideTime);
+                playerMaterial.SetFloat(hideMaterialPropertyName, materialHideTime);
             }
 
             if (currentHideActionTime >= 7.1f)
