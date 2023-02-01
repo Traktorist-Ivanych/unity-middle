@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJerk : PlayerInputActionDelay, IInputAbility
+public class PlayerJerk : PlayerInputActionPossibility, IInputAbility
 {
     [SerializeField] private Transform transformForDuraction;
     [SerializeField] private float jerkSpeed;
 
     private Rigidbody playerRigidbody;
 
-    private void Start()
+    private protected override void OnStart()
     {
         playerRigidbody = GetComponent<Rigidbody>();
     }

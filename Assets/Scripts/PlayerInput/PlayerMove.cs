@@ -4,26 +4,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class PlayerMove : MonoBehaviour, IInputAbility, IConfigurable
+public class PlayerMove : PlayerInputActionPossibility, IInputAbility, IConfigurable
 {
+    [SerializeField] private float runningAnimSpeedDivider;
+    private Animator playerAnimator;
     private Rigidbody playerRigidbody;
     private Transform playerTransform;
     private Vector2 readPlayerInput;
     private float moveSpeed;
+    private string runningParameterName = "IsRunning";
+    private string runningSpeedParameterName = "RunningSpeed";
 
     public IConfiguration Configuration { get; set; }
 
-    private void Start()
+    private protected override void OnStart()
     {
         moveSpeed = Configuration.PlayerMoveSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         playerTransform = GetComponent<Transform>();
-    }
-
-    [Inject]
-    public void LoadConfiguration(IConfiguration config)
-    {
-        Configuration = config;
+        playerAnimator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -37,8 +36,35 @@ public class PlayerMove : MonoBehaviour, IInputAbility, IConfigurable
         }
     }
 
+    private void Update()
+    {
+        if (playerRigidbody.velocity.magnitude > 0.025f && readPlayerInput.magnitude > 0.025f)
+        {
+            playerAnimator.SetBool(runningParameterName, true);
+            float playerRunningAnimSpeed = playerRigidbody.velocity.magnitude / runningAnimSpeedDivider;
+            playerAnimator.SetFloat(runningSpeedParameterName, playerRunningAnimSpeed);
+        }
+        else
+        {
+            playerAnimator.SetBool(runningParameterName, false);
+        }
+    }
+
+    [Inject]
+    public void LoadConfiguration(IConfiguration config)
+    {
+        Configuration = config;
+    }
+
     public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
-        readPlayerInput = context.ReadValue<Vector2>();
+        if (CanActionExecute)
+        {
+            readPlayerInput = context.ReadValue<Vector2>();
+        }
+        else
+        {
+            readPlayerInput = Vector2.zero;
+        }
     }
 }

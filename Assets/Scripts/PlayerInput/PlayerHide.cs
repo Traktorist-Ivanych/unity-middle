@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
 
-public class PlayerHide : PlayerInputActionDelay, IInputAbility
+public class PlayerHide : PlayerInputActionPossibility, IInputAbility
 {
     [SerializeField] private Material playerMaterial;
     private bool executeHideActions;
@@ -12,7 +12,7 @@ public class PlayerHide : PlayerInputActionDelay, IInputAbility
     private float currentHideActionTime;
     private string hideMaterialPropertyName = "Vector1_bad362c3d9cd4b628db70be4da5de212";
 
-    private void Start()
+    private protected override void OnStart()
     {
         playerMaterial.SetFloat(hideMaterialPropertyName, 1);
     }

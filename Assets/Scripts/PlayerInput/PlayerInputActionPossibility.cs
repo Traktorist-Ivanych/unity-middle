@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputActionDelay : MonoBehaviour
+public class PlayerInputActionPossibility : MonoBehaviour
 {
     [SerializeField] private float actionDelay;
+    private Health playerHealth;
     private float currentActionTime = float.MinValue;
 
-     private protected bool CanActionExecute
+    private void Start()
+    {
+        playerHealth = GetComponent<Health>();
+        OnStart();
+    }
+
+    private protected bool CanActionExecute
     {
         get
         {
-            if (Time.time > currentActionTime + actionDelay)
+            if (Time.time >= currentActionTime + actionDelay && playerHealth.IsAlive)
             {
                 currentActionTime = Time.time;
                 return true;
@@ -21,5 +28,10 @@ public class PlayerInputActionDelay : MonoBehaviour
                 return false;
             }
         }
+    }
+
+    private protected virtual void OnStart()
+    {
+
     }
 }

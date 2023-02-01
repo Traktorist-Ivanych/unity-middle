@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerAttack : PlayerInputActionDelay, IInputAbility
+public class PlayerAttack : PlayerInputActionPossibility, IInputAbility
 {
     [SerializeField] private TrailRenderer swordTrail;
     [SerializeField] private Rigidbody bulletRigidbody;
@@ -11,26 +11,37 @@ public class PlayerAttack : PlayerInputActionDelay, IInputAbility
     [SerializeField] private Transform bulletStartTransform;
     [SerializeField] private float bulletSpeed;
 
+    private Animator playerAnimator;
     private Rigidbody playerRigidbody;
+    private string attackParameterName = "Attack";
 
-    private void Start()
+    private protected override void OnStart()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
         if (CanActionExecute)
         {
-            bulletRigidbody.velocity = Vector3.zero;
-            bulletRigidbody.angularVelocity = Vector3.zero;
-            bulletRigidbody.transform.SetPositionAndRotation(
-                bulletStartTransform.position, bulletStartTransform.rotation);
-            swordTrail.Clear();
+            playerAnimator.SetTrigger(attackParameterName);
 
-            Vector3 duraction = (transform.position - transformForDuraction.position).normalized;
-            bulletRigidbody.AddForce(duraction * bulletSpeed + playerRigidbody.velocity, 
-                ForceMode.Impulse);
+            StartCoroutine(ThrowBullet());
         }
+    }
+
+    private IEnumerator ThrowBullet()
+    {
+        yield return new WaitForSeconds(0.4f);
+        bulletRigidbody.velocity = Vector3.zero;
+        bulletRigidbody.angularVelocity = Vector3.zero;
+        bulletRigidbody.transform.SetPositionAndRotation(
+            bulletStartTransform.position, bulletStartTransform.rotation);
+        swordTrail.Clear();
+
+        Vector3 duraction = (transform.position - transformForDuraction.position).normalized;
+        bulletRigidbody.AddForce(duraction * bulletSpeed + playerRigidbody.velocity,
+            ForceMode.Impulse);
     }
 }
