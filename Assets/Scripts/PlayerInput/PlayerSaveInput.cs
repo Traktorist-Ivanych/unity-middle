@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerSaveInput : MonoBehaviour, IInputAbility
 {
-    public void ExecuteInputAbility(InputAction.CallbackContext context)
+    [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
+
+    public async void ExecuteInputAbility(InputAction.CallbackContext context)
     {
         SavesManager.SaveGame();
+        await saveLoadConfiguration.SaveConfiguration();
     }
 }

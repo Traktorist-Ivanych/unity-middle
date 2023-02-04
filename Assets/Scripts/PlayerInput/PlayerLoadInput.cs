@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerLoadInput : MonoBehaviour, IInputAbility
 {
-    public void ExecuteInputAbility(InputAction.CallbackContext context)
+    [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
+
+    public async void ExecuteInputAbility(InputAction.CallbackContext context)
     {
         PlayFabTools.LoadGame();
+        await saveLoadConfiguration.LoadConfiguration();
     }
 }
