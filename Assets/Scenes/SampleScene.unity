@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9227534a5f16893428426527225b764f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flag: 1
+  flag: 0
   sOConfig: {fileID: 11400000, guid: e9de7c3cc2624c94a84765853986c97e, type: 2}
   config: {fileID: 332151359}
 --- !u!114 &181764487
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81141550b44473c41b3478ed87a39316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configuration: {fileID: 0}
+  configuration: {fileID: 332151359}
 --- !u!114 &332151359
 MonoBehaviour:
   m_ObjectHideFlags: 0
