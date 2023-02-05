@@ -7,9 +7,9 @@ public class PlayerSaveInput : MonoBehaviour, IInputAbility
 {
     [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
 
-    public async void ExecuteInputAbility(InputAction.CallbackContext context)
+    public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
         SavesManager.SaveGame();
-        await saveLoadConfiguration.SaveConfiguration();
+        saveLoadConfiguration.SaveConfiguration();
     }
 }

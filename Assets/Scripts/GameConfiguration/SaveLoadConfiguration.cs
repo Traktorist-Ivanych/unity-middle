@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SaveLoadConfiguration : MonoBehaviour
@@ -15,22 +12,22 @@ public class SaveLoadConfiguration : MonoBehaviour
         path = Application.persistentDataPath + "/GameConfig.json";
     }
 
-    public async Task SaveConfiguration()
+    public async void SaveConfiguration()
     {
         ConfigurationDataToSave configurationData = new ConfigurationDataToSave(
             configuration.MaxPlayerHP, configuration.PlayerMoveSpeed);
         string saveConfig = JsonUtility.ToJson(configurationData);
-        File.WriteAllText(path, saveConfig);
-        await Task.Yield();
+
+        await Task.Run(() => File.WriteAllText(path, saveConfig));
     }
 
-    public async Task LoadConfiguration()
+    public async void LoadConfiguration()
     {
-        string loadConfigJson = File.ReadAllText(path);
+        string loadConfigJson = await Task.Run(() => File.ReadAllText(path));
+
         ConfigurationDataToSave loadConfig = JsonUtility.FromJson<ConfigurationDataToSave>(loadConfigJson);
         configuration.MaxPlayerHP = loadConfig.MaxPlayerHP;
         configuration.PlayerMoveSpeed = loadConfig.PlayerMoveSpeed;
-        await Task.Yield();
     }
 
     private class ConfigurationDataToSave

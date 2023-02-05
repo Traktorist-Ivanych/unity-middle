@@ -7,9 +7,9 @@ public class PlayerLoadInput : MonoBehaviour, IInputAbility
 {
     [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
 
-    public async void ExecuteInputAbility(InputAction.CallbackContext context)
+    public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
         PlayFabTools.LoadGame();
-        await saveLoadConfiguration.LoadConfiguration();
+        saveLoadConfiguration.LoadConfiguration();
     }
 }
