@@ -23,4 +23,9 @@ public class PlayerJerk : PlayerInputActionPossibility, IInputAbility
             playerRigidbody.AddForce(duraction * jerkSpeed, ForceMode.Impulse);
         }
     }
+
+    public void RaiseJerkSpeed(float value)
+    {
+        jerkSpeed += value;
+    }
 }

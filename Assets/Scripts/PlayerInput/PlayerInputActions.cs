@@ -9,6 +9,7 @@ public class PlayerInputActions : MonoBehaviour
     [SerializeField] private MonoBehaviour playerAttack;
     [SerializeField] private MonoBehaviour playerMove;
     [SerializeField] private MonoBehaviour playerHide;
+    [SerializeField] private MonoBehaviour playerInventory;
     [SerializeField] private MonoBehaviour playerSave;
     [SerializeField] private MonoBehaviour playerLoad;
     private PlayerInputControls inputControls;
@@ -35,6 +36,11 @@ public class PlayerInputActions : MonoBehaviour
         {
             inputControls.Keyboard.Hide.started += (playerHide as IInputAbility).ExecuteInputAbility;
         }
+        if (playerInventory is IInputAbility)
+        {
+            inputControls.Keyboard.Inventory.started += (playerInventory as IInputAbility).ExecuteInputAbility;
+        }
+
         if (playerSave is IInputAbility)
         {
             inputControls.Keyboard.Save.started += (playerSave as IInputAbility).ExecuteInputAbility;

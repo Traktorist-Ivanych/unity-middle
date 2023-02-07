@@ -25,6 +25,11 @@ public class Health : MonoBehaviour, IConfigurable
         set { hpCurrentValue = value; }
     }
 
+    public float HpMaxValue
+    {
+        get => hpMaxValue;
+    }
+
     public bool IsNeedForCure
     {
         get

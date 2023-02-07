@@ -80,6 +80,15 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""f55c714a-ed3d-44ad-a773-f59ff69a291a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Hide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2961a27a-aed0-4c7e-aa77-030e3ffa65c9"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -217,6 +237,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         m_Keyboard_Hide = m_Keyboard.FindAction("Hide", throwIfNotFound: true);
         m_Keyboard_Save = m_Keyboard.FindAction("Save", throwIfNotFound: true);
         m_Keyboard_Load = m_Keyboard.FindAction("Load", throwIfNotFound: true);
+        m_Keyboard_Inventory = m_Keyboard.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -282,6 +303,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Hide;
     private readonly InputAction m_Keyboard_Save;
     private readonly InputAction m_Keyboard_Load;
+    private readonly InputAction m_Keyboard_Inventory;
     public struct KeyboardActions
     {
         private @PlayerInputControls m_Wrapper;
@@ -292,6 +314,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         public InputAction @Hide => m_Wrapper.m_Keyboard_Hide;
         public InputAction @Save => m_Wrapper.m_Keyboard_Save;
         public InputAction @Load => m_Wrapper.m_Keyboard_Load;
+        public InputAction @Inventory => m_Wrapper.m_Keyboard_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +342,9 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Load.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
                 @Load.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
                 @Load.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLoad;
+                @Inventory.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -341,6 +367,9 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Load.started += instance.OnLoad;
                 @Load.performed += instance.OnLoad;
                 @Load.canceled += instance.OnLoad;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -353,5 +382,6 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         void OnHide(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
