@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerFactory : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerFactory : MonoBehaviour
     [Header("Scripts for instantiated player")]
     [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
     [SerializeField] private ViewModel viewModel;
-    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private Canvas inventoryUI;
 
     public void CreatePlayer()
     {

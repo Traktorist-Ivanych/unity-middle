@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UISpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 512
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 85c7627a848e0644fac25f8998242da3, type: 3}
+    - {fileID: 21300000, guid: 62d9df687cac9b148bd9577cb53c018f, type: 3}
+    - {fileID: 21300000, guid: 6e5d5bc1b29ddd14c98c43329e468976, type: 3}
+    - {fileID: 21300000, guid: 0dafcb51fc093e0408b4f420ad51087a, type: 3}
+    - {fileID: 21300000, guid: 1697ccf590281fa4f974310ffe3f5566, type: 3}
+    - {fileID: 21300000, guid: 6b02deaa1edd7ae4ab7f28feece8236d, type: 3}
+    - {fileID: 21300000, guid: 614f580b116d9044f8411c60ff489d08, type: 3}
+    - {fileID: 21300000, guid: 9baea847de69370479be0f9f203a88ad, type: 3}
+    - {fileID: 21300000, guid: 5b2c7fb21f0b470408be1b1000861446, type: 3}
+    - {fileID: 21300000, guid: b42314f778a79df4c96047e02a65c9d1, type: 3}
+    - {fileID: 21300000, guid: ff96ae843aafb1542a24616e4027a017, type: 3}
+    - {fileID: 21300000, guid: f04906823934e4449875d6d516660b33, type: 3}
+    - {fileID: 21300000, guid: 3049659fe0d97f443985fce7e9ea4a3c, type: 3}
+    - {fileID: 21300000, guid: f12c1ff929eb1fb4ca9a172fcc9a3cfc, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 0dafcb51fc093e0408b4f420ad51087a, type: 3}
+  - {fileID: 21300000, guid: 6e5d5bc1b29ddd14c98c43329e468976, type: 3}
+  - {fileID: 21300000, guid: f04906823934e4449875d6d516660b33, type: 3}
+  - {fileID: 21300000, guid: 5b2c7fb21f0b470408be1b1000861446, type: 3}
+  - {fileID: 21300000, guid: ff96ae843aafb1542a24616e4027a017, type: 3}
+  - {fileID: 21300000, guid: 1697ccf590281fa4f974310ffe3f5566, type: 3}
+  - {fileID: 21300000, guid: 9baea847de69370479be0f9f203a88ad, type: 3}
+  - {fileID: 21300000, guid: b42314f778a79df4c96047e02a65c9d1, type: 3}
+  - {fileID: 21300000, guid: 62d9df687cac9b148bd9577cb53c018f, type: 3}
+  - {fileID: 21300000, guid: f12c1ff929eb1fb4ca9a172fcc9a3cfc, type: 3}
+  - {fileID: 21300000, guid: 85c7627a848e0644fac25f8998242da3, type: 3}
+  - {fileID: 21300000, guid: 6b02deaa1edd7ae4ab7f28feece8236d, type: 3}
+  - {fileID: 21300000, guid: 614f580b116d9044f8411c60ff489d08, type: 3}
+  - {fileID: 21300000, guid: 3049659fe0d97f443985fce7e9ea4a3c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - metalPanel
+  - medal2
+  - menuGrid
+  - import
+  - JoystickBackground
+  - yellow_button06
+  - export
+  - Jerk
+  - medal1
+  - Stick
+  - glassPanel_corners
+  - Attack
+  - dice_shield
+  - red_boxCross
+  m_RenderDataMap: {}
+  m_Tag: UISpriteAtlas
+  m_IsVariant: 0

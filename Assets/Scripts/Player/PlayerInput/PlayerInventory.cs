@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour, IInputAbility, IFactoryCreation
 {
-    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private Canvas inventoryUI;
 
     public void ExecuteInputAbility(InputAction.CallbackContext context)
     {
-        inventoryUI.SetActive(true);
+        inventoryUI.enabled = true;
     }
 
     public void OnInstantiation(Object instantiatedObject)
     {
-        inventoryUI = instantiatedObject as GameObject;
+        inventoryUI = instantiatedObject as Canvas;
     }
 }
