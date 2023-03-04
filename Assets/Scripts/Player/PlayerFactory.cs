@@ -1,6 +1,5 @@
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerFactory : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class PlayerFactory : MonoBehaviour
     [SerializeField] private SaveLoadConfiguration saveLoadConfiguration;
     [SerializeField] private ViewModel viewModel;
     [SerializeField] private Canvas inventoryUI;
+    [SerializeField] private Canvas storeShoppingUI;
 
     public void CreatePlayer()
     {
@@ -38,6 +38,10 @@ public class PlayerFactory : MonoBehaviour
             else if (playerInput is PlayerInventory)
             {
                 (playerInput as IFactoryCreation).OnInstantiation(inventoryUI);
+            }
+            else if (playerInput is PlayerStore)
+            {
+                (playerInput as IFactoryCreation).OnInstantiation(storeShoppingUI);
             }
         }
     }

@@ -89,6 +89,15 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Store"",
+                    ""type"": ""Button"",
+                    ""id"": ""2affe17e-cf76-49d1-b6f3-62d7f3722575"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -223,11 +232,28 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c7fd437-195e-466c-8984-029bb9c7a101"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Store"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""PlayerInputControl"",
+            ""bindingGroup"": ""PlayerInputControl"",
+            ""devices"": []
+        }
+    ]
 }");
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
@@ -238,6 +264,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         m_Keyboard_Save = m_Keyboard.FindAction("Save", throwIfNotFound: true);
         m_Keyboard_Load = m_Keyboard.FindAction("Load", throwIfNotFound: true);
         m_Keyboard_Inventory = m_Keyboard.FindAction("Inventory", throwIfNotFound: true);
+        m_Keyboard_Store = m_Keyboard.FindAction("Store", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +331,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Keyboard_Save;
     private readonly InputAction m_Keyboard_Load;
     private readonly InputAction m_Keyboard_Inventory;
+    private readonly InputAction m_Keyboard_Store;
     public struct KeyboardActions
     {
         private @PlayerInputControls m_Wrapper;
@@ -315,6 +343,7 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         public InputAction @Save => m_Wrapper.m_Keyboard_Save;
         public InputAction @Load => m_Wrapper.m_Keyboard_Load;
         public InputAction @Inventory => m_Wrapper.m_Keyboard_Inventory;
+        public InputAction @Store => m_Wrapper.m_Keyboard_Store;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -345,6 +374,9 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInventory;
+                @Store.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnStore;
+                @Store.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnStore;
+                @Store.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnStore;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -370,10 +402,22 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Store.started += instance.OnStore;
+                @Store.performed += instance.OnStore;
+                @Store.canceled += instance.OnStore;
             }
         }
     }
     public KeyboardActions @Keyboard => new KeyboardActions(this);
+    private int m_PlayerInputControlSchemeIndex = -1;
+    public InputControlScheme PlayerInputControlScheme
+    {
+        get
+        {
+            if (m_PlayerInputControlSchemeIndex == -1) m_PlayerInputControlSchemeIndex = asset.FindControlSchemeIndex("PlayerInputControl");
+            return asset.controlSchemes[m_PlayerInputControlSchemeIndex];
+        }
+    }
     public interface IKeyboardActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -383,5 +427,6 @@ public partial class @PlayerInputControls : IInputActionCollection2, IDisposable
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnStore(InputAction.CallbackContext context);
     }
 }

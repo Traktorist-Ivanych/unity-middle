@@ -8,15 +8,15 @@ public class PlayerInputActions : MonoBehaviour
     [SerializeField] private MonoBehaviour playerMove;
     [SerializeField] private MonoBehaviour playerHide;
     [SerializeField] private MonoBehaviour playerInventory;
+    [SerializeField] private MonoBehaviour playerStore;
     [SerializeField] private MonoBehaviour playerSave;
     [SerializeField] private MonoBehaviour playerLoad;
-    private PlayerInputControls inputControls;
 
     private void Start()
     {
         if (PhotonView.Get(gameObject).IsMine)
         {
-            inputControls = new PlayerInputControls();
+            PlayerInputControls inputControls = new PlayerInputControls();
             inputControls.Keyboard.Enable();
             if (playerJekr is IInputAbility)
             {
@@ -39,6 +39,10 @@ public class PlayerInputActions : MonoBehaviour
             if (playerInventory is IInputAbility)
             {
                 inputControls.Keyboard.Inventory.started += (playerInventory as IInputAbility).ExecuteInputAbility;
+            }
+            if (playerStore is IInputAbility)
+            {
+                inputControls.Keyboard.Store.started += (playerStore as IInputAbility).ExecuteInputAbility;
             }
 
             if (playerSave is IInputAbility)
