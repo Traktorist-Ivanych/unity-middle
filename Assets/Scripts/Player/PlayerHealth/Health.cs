@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
 
     public bool IsAlive
     {
-        get { return isAlive; }
+        get => isAlive;
     }
 
     public float CurrentHp
